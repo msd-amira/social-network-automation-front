@@ -1,14 +1,13 @@
 export class User {
-    userId: any;
-    firstname : string;
-    lastname : string;
-    email : string;
-    role: any;
-    password : string;
-    namecompany: string;
-    phonenumber: any;
-    languageId : any;
-    constructor(parameters) {
-        
-    }
+    id: any;
+    email: string;
+    firstname: string;
+    lastname: string;
+    phoneNumber: string;
+    languageID: string;
+    nameCompany: string;
+    username: string;
+    roles: string;
+    password: string;
+    verified: boolean;
 }
