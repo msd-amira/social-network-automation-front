@@ -16,6 +16,7 @@ export class UserService {
   constructor(private http: HttpClient, private _router : Router) { }
 
   register(user){
+    console.log(user);
    return this.http.post('https://127.0.0.1:8000/api/users',user);
   }
 
