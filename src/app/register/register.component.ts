@@ -41,10 +41,9 @@ export class RegisterComponent implements OnInit {
       console.log(res['hydra:member']);
       res['hydra:member'].forEach(async (element: Language) => {
         this.langues.push(element);
-        console.log(element['@id']);
       });
     })
-    await console.log(this.langues);
+    console.log(this.langues);
   }
 
   async newUser(userForm : any) : Promise<any>{

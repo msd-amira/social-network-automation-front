@@ -1,0 +1,27 @@
+.btn-theme {
+    color: #fff;
+    background-color: #797878;
+    border-color: #727474;
+    margin-top: 60px;
+  }
+  .btn-theme:hover,
+  .btn-theme:focus,
+  .btn-theme:active,
+  .btn-theme.active,
+  .open .dropdown-toggle.btn-theme {
+    color: #fff;
+    background-color: #646464;
+    border-color: #727474;
+  }
+
+  
+  .btn-clear-g {
+      color: #727474;
+      background: transparent;
+      border-color: #727474;
+  }
+  
+  .btn-clear-g:hover {
+      color: white;
+  }
+  

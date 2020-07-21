@@ -253,17 +253,27 @@ body {
   margin-bottom: 150px; }
 
 .signup-content {
-  padding: 75px 0; }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* padding: 75px 0;  */
+}
 
 .signup-form, .signup-image, .signin-form, .signin-image {
-  width: 50%;
+  width: 40%;
   overflow: hidden; }
 
 .signup-image {
   margin: 0 55px; }
 
 .form-title {
-  margin-bottom: 33px; }
+  margin-top: 30px; }
 
 .signup-image {
   margin-top: 45px; }
@@ -451,8 +461,18 @@ label.valid {
   font-size: 18px; }
 
 .signin-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   padding-top: 67px;
-  padding-bottom: 87px; }
+  padding-bottom: 87px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
 
 .social-login {
   align-items: center;

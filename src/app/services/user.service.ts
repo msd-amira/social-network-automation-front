@@ -20,6 +20,10 @@ export class UserService {
    return this.http.post('https://127.0.0.1:8000/api/users',user);
   }
 
+  login(email: string,password: string){
+   return this.http.get('https://127.0.0.1:8000/api/users/email/'+email+'/'+password);
+  }
+
   logoutUser(){
     localStorage.removeItem('token');
     this._router.navigate(['/']);

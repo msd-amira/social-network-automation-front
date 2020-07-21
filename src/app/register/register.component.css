@@ -2,6 +2,7 @@
     color: #fff;
     background-color: #797878;
     border-color: #727474;
+    margin-bottom: 30px;
   }
   .btn-theme:hover,
   .btn-theme:focus,
@@ -22,11 +23,4 @@
   
   .btn-clear-g:hover {
       color: white;
-  }
-  
-  hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #797979;
   }
