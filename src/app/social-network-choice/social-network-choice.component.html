@@ -1,0 +1,107 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<!-- Start Login with Facebook -->
+<!-- <script>
+
+    function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+        console.log('statusChangeCallback');
+        console.log(response);                   // The current login status of the person.
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+            testAPI();
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+            document.getElementById('status').innerHTML = 'Please log ' +
+                'into this webpage.';
+        }
+    }
+
+
+    function checkLoginState() {               // Called when a person is finished with the Login Button.
+        FB.getLoginStatus(function (response) {   // See the onlogin handler
+            statusChangeCallback(response);
+        });
+    }
+
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '{app-id}',
+            cookie: true,                     // Enable cookies to allow the server to access the session.
+            xfbml: true,                     // Parse social plugins on this webpage.
+            version: '{api-version}'           // Use this Graph API version for this call.
+        });
+
+
+        FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+            statusChangeCallback(response);        // Returns the login status.
+        });
+    };
+
+    function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function (response) {
+            console.log('Successful login for: ' + response.name);
+            document.getElementById('status').innerHTML =
+                'Thanks for logging in, ' + response.name + '!';
+        });
+    }
+
+</script> -->
+
+
+<!-- The JS SDK Login Button -->
+
+
+
+<!-- Load the JS SDK asynchronously -->
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<!-- End Login with Facebook  -->
+<!-- Social Netwok -->
+<section id="Social Netwok" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1">Ch</h5>
+        <div class="row">
+            <!-- Social Netwok item -->
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let item of snList">
+                <div class="image-flip">
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid"
+                                            src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
+                                            alt="card image"></p>
+                                    <h4 class="card-title">{{item?.label}}</h4>
+                                    <p class="card-text">Manage & amplify multiple brands on social media</p>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i
+                                            class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h4 class="card-title">{{item?.label}}</h4>
+                                    <p class="card-text">Schedule posts to your personal account. When posting
+                                        to your social media via the dashboard, you will receive a push notification or email
+                                        for manual posting from your device at the appropriate time.</p>
+                                        <button *ngIf="item?.label == 'Facebook'" class="btn btn-primary" (click)="facebook_signin()">
+                                            <span class="fa fa-facebook"></span>
+                                            Sign In with Facebook
+                                        </button>
+                                    <div class="list-inline">
+                                        
+                                        <button (click)="selectItem(item?.id)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Social Netwok item -->
+        </div>
+    </div>
+</section>
+<!-- Social Netwok -->

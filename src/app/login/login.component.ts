@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       if(typeof(Storage) !== 'undefined'){
         localStorage.setItem("email" , this.user.email);
         localStorage.setItem("user" , JSON.stringify(this.user));
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     },
     error =>{
