@@ -4,6 +4,8 @@ import { UserService } from '../services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { User } from '../Models/User';
+import { SocialNetworkService } from '../services/social-network.service';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-login',
@@ -12,41 +14,69 @@ import { User } from '../Models/User';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm : FormGroup;
-  user : User;
-  constructor(private userService : UserService, private router : Router) {
-    this.user = new User();
-    this.loginForm= new FormGroup({
+  loginForm: FormGroup;
+  user: any;
+  constructor(private userService: UserService, private snService: SocialNetworkService, private router: Router) {
+
+    this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)])
     })
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  loginBtn(){
-    console.log(this.loginForm.value);
-    this.userService.login(this.loginForm.value.email,this.loginForm.value.password).subscribe((res : any) =>{
-      console.log(res);
+  async loginBtn() {
+
+    localStorage.clear();
+    this.userService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(async (res: any) => {
+      console.log("login result \n", res);
       this.user = res;
-      if(typeof(Storage) !== 'undefined'){
-        localStorage.setItem("email" , this.user.email);
-        localStorage.setItem("user" , JSON.stringify(this.user));
-        this.router.navigate(['/home']);
-      }
-    },
-    error =>{
-      console.error();
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Wrong password or Email !',
+      
+      if (typeof (Storage) !== 'undefined') {
+        localStorage.setItem("user", JSON.stringify(this.user));
+
+        this.snService.getSnByID(this.user.id).subscribe( 
+          async (res :any) => {
+            console.log("Social networks's user resulat", res);
+            
+            res["hydra:member"].forEach(element => {
+              switch (element.labelNetwork) {
+                case "Facebook":
+                  localStorage.setItem("loginFB", JSON.stringify(element));
+                case "LinkedIn":
+                  localStorage.setItem("loginIN", JSON.stringify(element));
+                case "Instagram":
+                  localStorage.setItem("loginINS", JSON.stringify(element));
+                case "Pinterest":
+                  localStorage.setItem("loginPIN", JSON.stringify(element));
+                default:
+                  break;
+              }
+            });
+          },
+          (err : any) => {
+            console.error();
+          }
+          
+        );
         
-      }).then((result) =>{
-        this.loginForm.setValue({ email: '', password : ''});
+        this.router.navigate(['/social-networks']);
+      }
+
+    },
+      error => {
+        console.error();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Wrong password or Email !',
+
+        }).then((result) => {
+          this.loginForm.setValue({ email: '', password: '' });
+        });
       });
-    });
     //this.loginForm.setValue({password : md5(password)})
   }
 

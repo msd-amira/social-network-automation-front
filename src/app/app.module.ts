@@ -18,13 +18,17 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
+import { FacebookModule } from 'ngx-facebook';
+import { FacebookManagerComponent } from './facebook-manager/facebook-manager.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    SocialNetworkChoiceComponent
+    SocialNetworkChoiceComponent,
+    FacebookManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FacebookModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

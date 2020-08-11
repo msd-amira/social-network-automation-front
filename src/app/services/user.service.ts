@@ -25,7 +25,7 @@ export class UserService {
   }
 
   logoutUser(){
-    localStorage.removeItem('email');
+    localStorage.clear();
     this._router.navigate(['/']);
     console.log("logout");
   }

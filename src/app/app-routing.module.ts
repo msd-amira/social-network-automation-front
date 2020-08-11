@@ -9,7 +9,8 @@ import {AuthGuard} from './auth.guard';
 const routes: Routes = [
   {
     path : 'home',
-    component : HomeComponent, canActivate: [AuthGuard]
+    component : HomeComponent, 
+    canActivate: [AuthGuard]
   },{
     path : 'register',
     component : RegisterComponent
@@ -19,9 +20,14 @@ const routes: Routes = [
     component : LoginComponent
   },
   {
-    path : 'social-networkd',
+    path : 'social-networks',
     canActivate : [AuthGuard],
     component : SocialNetworkChoiceComponent
+  },
+  {
+    path : "**",
+    component : HomeComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

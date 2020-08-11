@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from "../services/user.service";
 import { RoleLanguageService } from "../services/role-language.service";
 import { Language } from "../Models/Language";
-import { async } from 'rxjs/internal/scheduler/async';
 import { User } from '../Models/User';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -65,14 +65,21 @@ export class RegisterComponent implements OnInit {
    // console.warn(this.RegisterForm.value);
     console.log(this.RegisterForm.valid);
     if(!this.RegisterForm.valid){
-      console.log("Please verify your data");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please verify your data !',
+      }).then((result) =>{
+        this.RegisterForm.reset();
+      });
     }else{
       console.log("correct !")  
       this.roleLanguageService.getRoleByLabel('ROLE_USER').subscribe(async (res : any) =>{
-        
+
         this.RegisterForm.patchValue({roles: res['@id'],});
         await this.newUser(this.RegisterForm.value);
-        console.log("useeeeeeeeeeeeeeeer",this.user);
+        console.log("new user:\n",this.user);
+        
         this.userService.register(this.user).subscribe( async(res : any) =>{
           console.log("register: \n",res);
         });

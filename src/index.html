@@ -19,6 +19,18 @@
   <!-- JS -->
   <script src="assets/templateLoginRegister/vendor/jquery/jquery.min.js"></script>
   <script src="assets/templateLoginRegister/js/main.js"></script>
-
+  <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '227386015000000',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v8.0'
+      });
+    };
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    
 </body>
 </html>
