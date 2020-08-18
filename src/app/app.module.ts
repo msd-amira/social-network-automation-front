@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 
 import { FacebookModule } from 'ngx-facebook';
 import { FacebookManagerComponent } from './facebook-manager/facebook-manager.component';
+import { FeedsComponent } from './feeds/feeds.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FacebookManagerComponent } from './facebook-manager/facebook-manager.co
     RegisterComponent,
     HomeComponent,
     SocialNetworkChoiceComponent,
-    FacebookManagerComponent
+    FacebookManagerComponent,
+    FeedsComponent
   ],
   imports: [
     BrowserModule,

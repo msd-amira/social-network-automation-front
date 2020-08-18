@@ -8,20 +8,19 @@
 <!-- Social Network -->
 <section id="Social Network" class="pb-5">
     <div class="container">
-        
         <div class="row">
             <div class="col">
-              </div>
-              <div class="col-6">
+            </div>
+            <div class="col-6">
                 <h5 class="h1">Social Networks</h5>
-              </div>
-              <div class="col-2"></div>
-              <div class="col">
+            </div>
+            <div class="col-2"></div>
+            <div class="col">
                 <button class="btn btn-dark btn-lg" (click)="logout()">
                     <span class="glyphicon glyphicon-log-out"></span> Log out
                 </button>
-              </div>
-            
+            </div>
+
         </div>
         <div class="row">
             <!-- Social Network item -->
@@ -31,9 +30,16 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid"
-                                            src="assets/images/facebook-logo.png"
-                                            alt="card image"></p>
+                                    <p>
+                                        <img *ngIf="item?.label == 'Facebook'" class=" img-fluid"
+                                            src="{{imgLogo}}facebook.png" alt="card image">
+                                        <img *ngIf="item?.label == 'LinkedIn'" class=" img-fluid"
+                                            src="{{imgLogo}}linkedin.png" alt="card image">
+                                        <img *ngIf="item?.label == 'Instagram'" class=" img-fluid"
+                                            src="{{imgLogo}}instagram.png" alt="card image">
+                                        <img *ngIf="item?.label == 'Pinterest'" class=" img-fluid"
+                                            src="{{imgLogo}}pinterest.png" alt="card image">
+                                    </p>
                                     <h4>{{item?.label}}</h4>
                                     <p class="card-text">{{item?.description}}</p>
                                 </div>
@@ -44,21 +50,24 @@
                                 <div class="card-body text-center mt-4">
                                     <h4>{{item?.label}}</h4>
                                     <p class="card-text">{{item?.descriptionDetails}}</p>
-                                        <button *ngIf="item?.label == 'Facebook'" class="btn btn-dark" (click)="facebook_signin(item)">
-                                            <i class="fa fa-facebook"></i>
-                                            Sign In with {{item?.label}}
-                                        </button>
-                                        <button *ngIf="item?.label == 'LinkedIn'" class="btn btn-dark" (click)="feedsFB()">
-                                            <i class="fa fa-linkedin"></i>
-                                            Sign In with {{item?.label}}
-                                        </button>
-                                        <button *ngIf="item?.label == 'Instagram'" class="btn btn-dark" (click)="instagram_signin(item)">
-                                            <i class="fa fa-instagram"></i>   Sign In with {{item?.label}}
-                                        </button>
-                                        <button *ngIf="item?.label == 'Pinterest'" class="btn btn-dark" (click)="pinterest_signin(item)">
-                                            <i class="fa fa-pinterest"></i>
-                                            Sign In with {{item?.label}}
-                                        </button>
+                                    <button *ngIf="item?.label == 'Facebook'" class="btn btn-dark"
+                                        (click)="facebook_signin(item)">
+                                        <i class="fa fa-facebook"></i>
+                                        Sign In with {{item?.label}}
+                                    </button>
+                                    <button *ngIf="item?.label == 'LinkedIn'" class="btn btn-dark" (click)="postFB()">
+                                        <i class="fa fa-linkedin"></i>
+                                        Sign In with {{item?.label}}
+                                    </button>
+                                    <button *ngIf="item?.label == 'Instagram'" class="btn btn-dark"
+                                        (click)="instagram_signin(item)">
+                                        <i class="fa fa-instagram"></i> Sign In with {{item?.label}}
+                                    </button>
+                                    <button *ngIf="item?.label == 'Pinterest'" class="btn btn-dark"
+                                        (click)="pinterest_signin(item)">
+                                        <i class="fa fa-pinterest"></i>
+                                        Sign In with {{item?.label}}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -66,6 +75,8 @@
                 </div>
             </div>
             <!-- ./Social Network item -->
+
+            
         </div>
     </div>
 </section>

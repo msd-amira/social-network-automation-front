@@ -20,6 +20,7 @@ export class SocialNetworkChoiceComponent implements OnInit {
   idSocialNetwork: Number;
   FB: any;
   accessToken: any;
+  imgLogo : string;
   constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService, private userService: UserService, private router: Router) {
     this.snList = new Array();
     // this.userSN = new UserHasSN();
@@ -35,6 +36,7 @@ export class SocialNetworkChoiceComponent implements OnInit {
       this.idSocialNetwork = null;
       this.accessToken = null;
     })
+    this.imgLogo = "assets/images/";
   }
 
   logout() {
@@ -142,10 +144,12 @@ export class SocialNetworkChoiceComponent implements OnInit {
     console.log(item);
   }
 
-  async postFB(page,msg): Promise<any> {
+  async postFB(): Promise<any> {
 
-    //console.log(authResponse.authResponse)
-    this.fbService.postsPageFB(page,msg).subscribe(
+    let authResponse = JSON.parse(localStorage.getItem('loginFB'));
+    let pages = JSON.parse(authResponse.pages)
+    console.log("Pages'user\n",pages);
+    this.fbService.schedulePostPageFB(pages[0],"lsdc,dk,sm").subscribe(
       async (resPost: any) => {
         console.log(resPost);
       },

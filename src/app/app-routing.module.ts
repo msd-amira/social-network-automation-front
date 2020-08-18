@@ -5,28 +5,38 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SocialNetworkChoiceComponent } from './social-network-choice/social-network-choice.component';
 import {AuthGuard} from './auth.guard';
+import { FacebookManagerComponent } from './facebook-manager/facebook-manager.component';
 
 const routes: Routes = [
-  {
-    path : 'home',
-    component : HomeComponent, 
-    canActivate: [AuthGuard]
-  },{
-    path : 'register',
-    component : RegisterComponent
-  },
   {
     path : '',
     component : LoginComponent
   },
   {
-    path : 'social-networks',
-    canActivate : [AuthGuard],
-    component : SocialNetworkChoiceComponent
+    path : 'register',
+    component : RegisterComponent
   },
   {
+    path : 'home',
+    component : HomeComponent, 
+    canActivate: [AuthGuard],
+    children : [
+      {
+        path : 'social-networks',
+        canActivate : [AuthGuard],
+        component : SocialNetworkChoiceComponent
+      },
+      {
+        path : 'facebook',
+        canActivate : [AuthGuard],
+        component : FacebookManagerComponent
+      },
+    ]
+  },
+  
+  {
     path : "**",
-    component : HomeComponent,
+    redirectTo : '/home',
     canActivate: [AuthGuard]
   }
 ];

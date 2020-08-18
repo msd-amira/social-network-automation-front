@@ -1,1 +1,118 @@
-<p>facebook-manager works!</p>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Inner Page</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>
+              <button class="btn btn-dark">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+              </button>
+            </li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <section class="inner-page">
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h1 >create a publication</h1>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <div *ngFor="let item of listSocials">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="{{item?.labelNetwork}}-tab" data-toggle="tab" href="#{{item?.labelNetwork}}"
+                role="tab" aria-controls="{{item?.labelNetwork}}"
+                (click)="selectedItem = item?.labelNetwork "><h3>{{item?.labelNetwork}}</h3></a>
+            </li>
+          </div>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade in active show" *ngIf="selectedItem === 'Facebook'" id="Facebook" role="tabpanel"
+            aria-labelledby="Facebook-tab">
+            <div class="panel-body">
+              <!-- <label for="cars">Choose a page:</label> -->
+              <p>
+                <select class="btn btn-primary " #itemPage [(ngModel)]="pageId"  name="cars" id="cars" style="font-size: medium;">
+
+                <option [ngValue]="none" >Choose your page</option>
+                <option [ngValue]="item?.id"  *ngFor="let item of listPages">{{item?.name}}
+                </option>
+              </select>
+            </p>
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !" style="font-size: large;" #textValue [(ngModel)]="textPost" ></textarea>
+                </div>
+              <button class="btn btn-primary btn-lg btn-block" (click) = "publish()">Publish</button>
+            </div>
+          </div>
+          <div class="tab-pane fade in active show" *ngIf="selectedItem === 'LinkedIn'" id="LinkedIn" role="tabpanel"
+            aria-labelledby="LinkedIn-tab">
+            <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !" style="font-size: large;" #textValue [(ngModel)]="textPost" ></textarea>
+                </div>
+              <button class="btn btn-primary btn-lg btn-block" (click) = "publish()">Publish</button>
+            </div>
+          </div>
+          <div class="tab-pane fade in active show" *ngIf="selectedItem === 'Pinterest'" id="Pinterest" role="tabpanel"
+            aria-labelledby="Pinterest-tab">
+            <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !" style="font-size: large;" #textValue [(ngModel)]="textPost" ></textarea>
+                </div>
+              <button class="btn btn-primary btn-lg btn-block" (click) = "publish()">Publish</button>
+            </div>
+          </div>
+          <div class="tab-pane fade in active show" *ngIf="selectedItem === 'Instagram'" id="Instagram" role="tabpanel"
+            aria-labelledby="Instagram-tab">
+            <div class="panel-body">
+                <div class="form-group">
+                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !" style="font-size: large;" #textValue [(ngModel)]="textPost" ></textarea>
+                </div>
+              <button class="btn btn-primary btn-lg btn-block" (click) = "publish()">Publish</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-2">
+      
+    </div>
+    <div class="col">
+      
+    </div>
+
+  </div>
+  <!-- <div class="row">
+  <div class="card border-secondary mb-3" style="max-width: 50rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-secondary">
+      <h5 class="card-title">Secondary Panel title</h5>
+      <p class="card-text">Some quick example text to build on the panel title and make up the bulk of the panel's content.</p>
+    </div>
+  </div>
+</div> -->
+</div>
+</section>

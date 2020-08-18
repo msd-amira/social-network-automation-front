@@ -1,3 +1,87 @@
-<p>home works!</p>
-<input type="button" value="AllUser" (click)="allUsers()" >
-<router-outlet></router-outlet>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Inner Page - iPortfolio Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link  rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+  
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="assets/images/facebook.png" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">Alex Smith</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.html"><i class="bx bx-home"></i> <span>Home</span></a></li>
+          <li><a routerLink="facebook" routerLinkActive="router-link-active" ><i class="bx bx-user"></i> <span>Publish posts</span></a></li>
+          <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>Feed</span></a></li>
+          <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
+          <li><a href="#services"><i class="bx bx-server"></i> Services</a></li>
+          <li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+      <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+
+
+    
+          <router-outlet></router-outlet>
+ 
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/templateLayout/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/templateLayout/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/templateLayout/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/templateLayout/vendor/php-email-form/validate.js"></script>
+  <script src="assets/templateLayout/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/templateLayout/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/templateLayout/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/templateLayout/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/templateLayout/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/templateLayout/vendor/typed.js/typed.min.js"></script>
+  <script src="assets/templateLayout/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/templateLayout/js/main.js"></script>
+
