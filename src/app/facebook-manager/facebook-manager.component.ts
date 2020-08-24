@@ -17,6 +17,7 @@ export class FacebookManagerComponent implements OnInit {
   selectedItem: string;
   pageId : string;
   textPost : string;
+  schedulePost : any;
   constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService) { }
 
   async ngOnInit(): Promise<any> {
@@ -56,31 +57,63 @@ export class FacebookManagerComponent implements OnInit {
 
   }
 
-  publish(){
+  publishFB(){
     
     console.log(this.pageId);
     
-    if ((this.pageId == "none" ) || ! this.pageId) {
+    if ((this.pageId == "none" ) || ! this.pageId ) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'You must choose a page!',
       })
-    } else {
+    } else if (! this.textPost){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You must write something !',
+      })
+    } 
+    else {
       let page : any ;
       this.listPages.forEach(element => {
         if (element.id == this.pageId) {
           page = element;
         }
       });
+
+      if (this.schedulePost) {
+        console.log("schedulePost date\n",this.schedulePost);
+        this.fbService.schedulePostPageFB(page,this.textPost,this.schedulePost).subscribe(
+          async (res : any) => {
+            console.log(res);
+            await Swal.fire({
+              icon: 'success',
+              title: 'Success...',
+              text: 'Your post is scheduled at ' + this.schedulePost +' !',
+            })
+            await this.ngOnInit();
+          }
+        )
+      }
+      else{
+      
       this.fbService.publishPostPageFB(page,this.textPost).subscribe(
-        (res : any) =>{
+        async (res : any) =>{
           console.log(res);
-          
+          await Swal.fire({
+            icon: 'success',
+            title: 'Success...',
+            text: 'Your post is published successfully !',
+          })
+          await this.ngOnInit();
         }
       );
+      }
     }
     
   }
+
+  publish(){}
 
 }

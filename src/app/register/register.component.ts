@@ -5,6 +5,7 @@ import { RoleLanguageService } from "../services/role-language.service";
 import { Language } from "../Models/Language";
 import { User } from '../Models/User';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   langues : Language [] = new Array() ;
   user : User;
 
-  constructor(private userService: UserService, private roleLanguageService: RoleLanguageService) {
+  constructor(private userService: UserService, private roleLanguageService: RoleLanguageService, private router: Router) {
     this.RegisterForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       firstname: new FormControl('', Validators.required),
@@ -82,6 +83,7 @@ export class RegisterComponent implements OnInit {
         
         this.userService.register(this.user).subscribe( async(res : any) =>{
           console.log("register: \n",res);
+          this.router.navigate(['/']);
         });
       });
     }

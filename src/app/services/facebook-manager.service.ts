@@ -69,15 +69,19 @@ export class FacebookManagerService {
   }
 
   getPagesAccessToken (longUsertoken  : any){
-    return this.http.get("https://graph.facebook.com/v8.0/2470424083256688/accounts?fields=name,access_token&access_token=" + longUsertoken);
+    return this.http.get("https://graph.facebook.com/v8.0/2470424083256688/accounts?fields=name,access_token,link&access_token=" + longUsertoken);
   }
 
   feedsFB(authResponse  : any) {
     return this.http.get("https://graph.facebook.com/"+authResponse.userSNId+"/feed?access_token=" + authResponse.longAccesstoken);
   }
-
+  
   getPostsUserFB(authResponse  : any) {
     return this.http.get("https://graph.facebook.com/me/feed?access_token=" + authResponse.longAccesstoken);
+  }
+
+  getFeedsPage(page : any){
+    return this.http.get("https://graph.facebook.com/" + page.id + "/feed?fields=permalink_url&access_token=" +  page.access_token);
   }
 
   publishPostPageFB(page : any, msg : any){
@@ -100,12 +104,8 @@ export class FacebookManagerService {
     return this.http.post("https://graph.facebook.com/" + idPost + "/feed?published=true",idPost);
   }
 
-  schedulePostPageFB(page : any, msg : any){
-    const minutes = 15;
-    let time =  " 2020-08-12 13:40:00"
-    console.log(time);
-    
-    return this.http.post("https://graph.facebook.com/" + page.id + "/feed?published=false" + "&message=" + msg + "&scheduled_publish_time=" + time + "&access_token=" + page.access_token ,msg)
+  schedulePostPageFB(page : any, msg : any, schedulePost : any){
+    return this.http.post("https://graph.facebook.com/" + page.id + "/feed?published=false" + "&message=" + msg + "&scheduled_publish_time=" + schedulePost + "&access_token=" + page.access_token ,msg)
   }
 
   updatePostPage(page : any, idPost : any, msg : any){

@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { SocialNetworkChoiceComponent } from './social-network-choice/social-network-choice.component';
 import {AuthGuard} from './auth.guard';
 import { FacebookManagerComponent } from './facebook-manager/facebook-manager.component';
+import { FeedsComponent } from './feeds/feeds.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
         path : 'facebook',
         canActivate : [AuthGuard],
         component : FacebookManagerComponent
+      },
+      {
+        path : 'feed',
+        canActivate : [AuthGuard],
+        component : FeedsComponent
       },
     ]
   },

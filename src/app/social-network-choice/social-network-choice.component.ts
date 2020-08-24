@@ -149,7 +149,7 @@ export class SocialNetworkChoiceComponent implements OnInit {
     let authResponse = JSON.parse(localStorage.getItem('loginFB'));
     let pages = JSON.parse(authResponse.pages)
     console.log("Pages'user\n",pages);
-    this.fbService.schedulePostPageFB(pages[0],"lsdc,dk,sm").subscribe(
+    this.fbService.publishPostPageFB(pages[0],"lsdc,dk,sm").subscribe(
       async (resPost: any) => {
         console.log(resPost);
       },
