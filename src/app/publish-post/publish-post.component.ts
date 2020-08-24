@@ -4,11 +4,11 @@ import { FacebookManagerService } from '../services/facebook-manager.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-facebook-manager',
-  templateUrl: './facebook-manager.component.html',
-  styleUrls: ['./facebook-manager.component.css']
+  selector: 'app-publish-post',
+  templateUrl: './publish-post.component.html',
+  styleUrls: ['./publish-post.component.css']
 })
-export class FacebookManagerComponent implements OnInit {
+export class PublishPostComponent implements OnInit {
   user: any;
   loginFB : any;
   itemPage : any;

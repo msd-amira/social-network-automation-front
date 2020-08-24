@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class FacebookManagerService {
 
-  public facebookUrlAuthorizeBase : string;
-  public facebookUrlGetTokenBase : string;
-  public facebookAppID : string;
-  public facebookAppSecret : string;
+  private facebookUrlAuthorizeBase : string;
+  private facebookUrlGetTokenBase : string;
+  private facebookAppID : string;
+  private facebookAppSecret : string;
 
   constructor(private http : HttpClient, private fb : FacebookService, private router : Router) {
 

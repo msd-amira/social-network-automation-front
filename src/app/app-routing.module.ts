@@ -5,8 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SocialNetworkChoiceComponent } from './social-network-choice/social-network-choice.component';
 import {AuthGuard} from './auth.guard';
-import { FacebookManagerComponent } from './facebook-manager/facebook-manager.component';
 import { FeedsComponent } from './feeds/feeds.component';
+import { PublishPostComponent } from './publish-post/publish-post.component';
 
 const routes: Routes = [
   {
@@ -28,9 +28,9 @@ const routes: Routes = [
         component : SocialNetworkChoiceComponent
       },
       {
-        path : 'facebook',
+        path : 'publish',
         canActivate : [AuthGuard],
-        component : FacebookManagerComponent
+        component : PublishPostComponent
       },
       {
         path : 'feed',

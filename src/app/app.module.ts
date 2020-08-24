@@ -19,8 +19,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { FacebookModule } from 'ngx-facebook';
-import { FacebookManagerComponent } from './facebook-manager/facebook-manager.component';
 import { FeedsComponent } from './feeds/feeds.component';
+import { PublishPostComponent } from './publish-post/publish-post.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,8 @@ import { FeedsComponent } from './feeds/feeds.component';
     RegisterComponent,
     HomeComponent,
     SocialNetworkChoiceComponent,
-    FacebookManagerComponent,
-    FeedsComponent
+    FeedsComponent,
+    PublishPostComponent
   ],
   imports: [
     BrowserModule,

@@ -22,9 +22,9 @@
     <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Feeds Page</h2>
+            <h2>Services Page</h2>
             <ol>
-                <li><a href="index.html">Home</a></li>
+                <li><a routerLink="home">Home</a></li>
                 <li>
                     <button class="btn btn-dark" (click)="logout()">
                         <span class="glyphicon glyphicon-log-out"></span> Log out
@@ -69,7 +69,7 @@
                                     <i class="fa fa-facebook"></i>
                                     Sign In with {{item?.label}}
                                 </button>
-                                <button *ngIf="item?.label == 'LinkedIn'" class="btn btn-dark" (click)="postFB()">
+                                <button *ngIf="item?.label == 'LinkedIn'" class="btn btn-dark" (click)="linkedin_signin(item)">
                                     <i class="fa fa-linkedin"></i>
                                     Sign In with {{item?.label}}
                                 </button>

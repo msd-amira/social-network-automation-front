@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FacebookManagerComponent } from './facebook-manager.component';
+import { PublishPostComponent } from './publish-post.component';
 
-describe('FacebookManagerComponent', () => {
-  let component: FacebookManagerComponent;
-  let fixture: ComponentFixture<FacebookManagerComponent>;
+describe('PublishPostComponent', () => {
+  let component: PublishPostComponent;
+  let fixture: ComponentFixture<PublishPostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FacebookManagerComponent ]
+      declarations: [ PublishPostComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FacebookManagerComponent);
+    fixture = TestBed.createComponent(PublishPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

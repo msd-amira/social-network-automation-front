@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocialNetwork } from "../Models/SocialNetwork";
 import { SocialNetworkService } from "../services/social-network.service";
 import { FacebookManagerService } from "../services/facebook-manager.service";
+import { LinkedinManagerService } from "../services/linkedin-manager.service";
 import { UserHasSN } from '../Models/UserHasSN';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -21,7 +22,7 @@ export class SocialNetworkChoiceComponent implements OnInit {
   FB: any;
   accessToken: any;
   imgLogo : string;
-  constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService, private userService: UserService, private router: Router) {
+  constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService, private userService: UserService, private linkService : LinkedinManagerService, private router: Router) {
     this.snList = new Array();
     // this.userSN = new UserHasSN();
     // this.FB = new Facebook();
@@ -132,8 +133,13 @@ export class SocialNetworkChoiceComponent implements OnInit {
   }
 
 
-  linkedin_signin(item: any) {
-    console.log(item);
+  async linkedin_signin(item: any): Promise<any> {
+    this.linkService.login().subscribe(
+      (res : any) => {
+        console.log(res);
+        
+      }
+      )
   }
 
   instagram_signin(item: any) {
