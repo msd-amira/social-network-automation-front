@@ -26,7 +26,7 @@ export class FacebookManagerService {
       version : 'v7.0'
     };
 
-    fb.init(initParams);
+    this.fb.init(initParams);
   }
 
   async loginWithFacebook() {

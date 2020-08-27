@@ -4,10 +4,12 @@ import { SocialNetworkService } from "../services/social-network.service";
 import { FacebookManagerService } from "../services/facebook-manager.service";
 import { LinkedinManagerService } from "../services/linkedin-manager.service";
 import { UserHasSN } from '../Models/UserHasSN';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationCancel } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from '../services/user.service';
 //import {Facebook} from 'fb';
+//import {  } from "auth0-js";
+import { } from '@angular/router';
 
 @Component({
   selector: 'app-social-network-choice',
@@ -18,34 +20,48 @@ export class SocialNetworkChoiceComponent implements OnInit {
 
   snList: SocialNetwork[];
   userSN: UserHasSN;
-  idSocialNetwork: Number;
   FB: any;
-  accessToken: any;
-  imgLogo : string;
-  constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService, private userService: UserService, private linkService : LinkedinManagerService, private router: Router) {
+  imgLogo: string;
+  itemLinkedin: any;
+  
+  constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService, private userService: UserService, private linkService: LinkedinManagerService, /*auth: AuthService,*/ private router: Router, private activatedRoute: ActivatedRoute) {
     this.snList = new Array();
-    // this.userSN = new UserHasSN();
-    // this.FB = new Facebook();
-    // this.FB.options({version: 'v7.0'});
   }
 
   async ngOnInit(): Promise<any> {
+
     this.snService.getAllSN().subscribe(async (res: any) => {
       //console.log(res);
       this.snList = await res['hydra:member'];
+      let codeOauth = this.activatedRoute.snapshot.queryParamMap.get('code');
+      if (codeOauth) {
+        this.addLinkedin(codeOauth, true);
+      }
+
+      let cancelLogin = this.activatedRoute.snapshot.queryParamMap.get('error');
+      if (cancelLogin) {
+        this.addLinkedin(cancelLogin, false);
+      }
       this.userSN = new UserHasSN();
-      this.idSocialNetwork = null;
-      this.accessToken = null;
-    })
+    });
     this.imgLogo = "assets/images/";
   }
 
   logout() {
     this.userService.logoutUser();
   }
-  selectItem(id: any) {
-    this.idSocialNetwork = id;
-    console.log(id);
+
+  async getItemByLabel(label: string): Promise<any> {
+    console.log("getItemByLabel", this.snList);
+    var item: any;
+    this.snList.forEach(async element => {
+      if (element.label == label) {
+        console.log(element);
+        item = element;
+        return item;
+      }
+    });
+    return null;
   }
 
   async addUserHAsSn(userSNId: string, longAccesstoken: string, labelNetwork: string, pages: string, photo = null, socialNetworksId: any, userId: any): Promise<any> {
@@ -98,12 +114,9 @@ export class SocialNetworkChoiceComponent implements OnInit {
 
                     this.snService.addUserHasSN(this.userSN).subscribe(
                       async (res: any) => {
-
                         console.log("add UserHasSN result \n", res);
                         localStorage.setItem("loginFB", JSON.stringify(res));
-                        //this.router.navigate(['/home']);
-                        
-    //let authResponse = JSON.parse(localStorage.getItem('loginFB'));
+                        this.router.navigate(['/home/social-networks']);
                       },
                       (error: any) => {
                         console.error(error);
@@ -111,15 +124,12 @@ export class SocialNetworkChoiceComponent implements OnInit {
                     );
                   }
                 }
-              )
-
-
+              );
             },
             (err: any) => {
               console.error(err);
-
             }
-          )
+          );
         });
     } else {
       Swal.fire({
@@ -132,59 +142,112 @@ export class SocialNetworkChoiceComponent implements OnInit {
 
   }
 
-
   async linkedin_signin(item: any): Promise<any> {
-    this.linkService.login().subscribe(
-      (res : any) => {
-        console.log(res);
-        
-      }
-      )
+    let tokenIN = localStorage.getItem("loginIN");
+    if (!tokenIN) {
+      let linkedinAppID = "77sa1axizmvjyj";
+      let redirect_uri_encode = "http%3A%2F%2Flocalhost%3A4200%2Fhome%2Fsocial-networks";
+      let scope = "r_emailaddress%20r_liteprofile%20w_member_social";
+      window.location.href = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + linkedinAppID + "&redirect_uri=" + redirect_uri_encode + "&scope=" + scope;
+
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You are already loggedIn !',
+
+      }).then(async (result) => {
+        await this.ngOnInit();
+      });
+    }
+    // ("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id="+ linkedinAppID + "&redirect_uri=" + redirect_uri_encode + "&scope=" + scope);
+
+  }
+
+  async addLinkedin(codeOauth: any, state: boolean): Promise<any> {
+
+    var item: any;
+
+    if (state) {
+      console.log("login succes with code: \n", codeOauth);
+      this.linkService.getAccessToken(codeOauth).subscribe(
+        async (resToken: any) => {
+          this.linkService.callMeAPI(resToken.access_token).subscribe(
+            async (resUser: any) => {
+              console.log(resUser);
+
+              item = await this.getItemByLabel("LinkedIn");
+              console.log(item);
+
+              let token = JSON.parse(localStorage.getItem('user'));
+
+              this.userSN = await this.addUserHAsSn(resUser.id, resToken.access_token, "LinkedIn", "", resUser.profilePicture.displayImage, "/api/social_networks/2", token['@id'])
+
+              this.snService.addUserHasSN(this.userSN).subscribe(
+                async (res: any) => {
+                  localStorage.setItem("loginIN", JSON.stringify(res));
+                  await this.router.navigate(['/home/social-networks']);
+                }
+              );
+            }
+          );
+        }
+      );
+    } else {
+      console.log("login error with error: \n", codeOauth);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: codeOauth,
+      }).then(async (result) => {
+        await this.router.navigate(['/home/social-networks']);
+      });
+    }
   }
 
   instagram_signin(item: any) {
-    console.log(item);
+    console.log(item.label);
   }
 
   pinterest_signin(item: any) {
     console.log(item);
   }
 
-  async postFB(): Promise<any> {
+  // async postFB(): Promise<any> {
 
-    let authResponse = JSON.parse(localStorage.getItem('loginFB'));
-    let pages = JSON.parse(authResponse.pages)
-    console.log("Pages'user\n",pages);
-    this.fbService.publishPostPageFB(pages[0],"lsdc,dk,sm").subscribe(
-      async (resPost: any) => {
-        console.log(resPost);
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
+  //   let authResponse = JSON.parse(localStorage.getItem('loginFB'));
+  //   let pages = JSON.parse(authResponse.pages)
+  //   console.log("Pages'user\n", pages);
+  //   this.fbService.publishPostPageFB(pages[0], "lsdc,dk,sm").subscribe(
+  //     async (resPost: any) => {
+  //       console.log(resPost);
+  //     },
+  //     (error: any) => {
+  //       console.error(error);
+  //     }
+  //   );
 
 
-    //  var body = 'My first post using facebook-node-sdk';
-    //  this.FB.api('me/feed', 'post', { message: body }, function (res) {
-    //   if(!res || res.error) {
-    //     console.log(!res ? 'error occurred' : res.error);
-    //     return;
-    //   }
-    //   console.log('Post Id: ' + res.id);
-    // });
-  }
-  async feedsFB(): Promise<any> {
+  //  var body = 'My first post using facebook-node-sdk';
+  //  this.FB.api('me/feed', 'post', { message: body }, function (res) {
+  //   if(!res || res.error) {
+  //     console.log(!res ? 'error occurred' : res.error);
+  //     return;
+  //   }
+  //   console.log('Post Id: ' + res.id);
+  // });
+  // }
+  // async feedsFB(): Promise<any> {
 
-    let authResponse = JSON.parse(localStorage.getItem('loginFB'));
-    //console.log(authResponse.authResponse)
-    this.fbService.feedsFB(authResponse).subscribe(
-      async (resPost: any) => {
-        console.log(resPost);
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-  }
+  //   let authResponse = JSON.parse(localStorage.getItem('loginFB'));
+  //   //console.log(authResponse.authResponse)
+  //   this.fbService.feedsFB(authResponse).subscribe(
+  //     async (resPost: any) => {
+  //       console.log(resPost);
+  //     },
+  //     (error: any) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }
 }

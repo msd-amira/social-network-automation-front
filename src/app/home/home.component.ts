@@ -11,20 +11,20 @@ export class HomeComponent implements OnInit {
   constructor(private apiService: UserService) { }
 
   ngOnInit(): void {
-    this.apiService.allUsers().subscribe((res:any) =>{
-      console.log(res);
-    },
-    (error)=>{
-      console.log(error);
-    }
-    );
+    // this.apiService.allUsers().subscribe((res:any) =>{
+    //   console.log(res);
+    // },
+    // (error)=>{
+    //   console.log(error);
+    // }
+    // );
   }
 
   allUsers(){
     
-    this.apiService.allUsers().subscribe((res:any) =>{
-      console.log(res['hydra:member']);
-    }
-    );
+    // this.apiService.allUsers().subscribe((res:any) =>{
+    //   console.log(res['hydra:member']);
+    // }
+    // );
   }
 }

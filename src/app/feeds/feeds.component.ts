@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FacebookManagerService } from '../services/facebook-manager.service';
 import { SocialNetworkService } from '../services/social-network.service';
 import Swal from 'sweetalert2';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-feeds',
   templateUrl: './feeds.component.html',
@@ -17,7 +18,7 @@ export class FeedsComponent implements OnInit {
   pageId: string;
   embededPosts: any[];
 
-  constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService) { }
+  constructor(private userService: UserService, private snService: SocialNetworkService, private fbService: FacebookManagerService) { }
 
   async ngOnInit(): Promise<any> {
     this.listSocials = []
@@ -28,12 +29,10 @@ export class FeedsComponent implements OnInit {
         this.listSocials = await res["hydra:member"];
         console.log("List social network's user \n", this.listSocials);
         this.listSocials.forEach(element => {
-          console.log("element");
 
           switch (element.labelNetwork) {
             case 'Facebook':
               {
-                console.log("element.labelNetwork");
                 this.loginFB = JSON.parse(localStorage.getItem("loginFB"));
                 this.fbService.getPagesAccessToken(this.loginFB.longAccesstoken).subscribe(
                   async (res: any) => {
@@ -63,18 +62,21 @@ export class FeedsComponent implements OnInit {
     );
   }
 
-  feedsShow(){
-    
+  logout() {
+    this.userService.logoutUser();
+  }
+  feedsShow() {
+
     console.log(this.pageId);
-    if ((this.pageId == "none" ) || ! this.pageId) {
+    if ((this.pageId == "none") || !this.pageId) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'You must choose a page!',
       })
     } else {
-      let page : any ;
-      
+      let page: any;
+
       this.listPages.forEach(element => {
         if (element.id == this.pageId) {
           page = element;
@@ -82,13 +84,13 @@ export class FeedsComponent implements OnInit {
       });
 
       this.fbService.getFeedsPage(page).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.embededPosts = res.data;
-      }
-    );
+        (res: any) => {
+          console.log(res);
+          this.embededPosts = res.data;
+        }
+      );
     }
-    
+
   }
 
 }

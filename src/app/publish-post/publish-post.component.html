@@ -14,16 +14,17 @@
 <section class="breadcrumbs">
   <div class="container">
 
-    <div class="d-flex justify-content-between align-items-center">
-      <h2>Publish Page</h2>
-      <ol>
-        <li><a href="index.html">Home</a></li>
-        <li>
-          <button class="btn btn-dark">
-            <span class="glyphicon glyphicon-log-out"></span> Log out
-          </button>
-        </li>
-      </ol>
+    <div class="row justify-content-between align-items-center">
+      <div class="col-3">
+        <h2>Publish post Page</h2>
+      </div>
+      <div class="col-7"></div>
+      <div class="col">
+        <button class="btn btn-dark" (click)="logout()">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </button>
+
+      </div>
     </div>
 
   </div>
@@ -36,14 +37,14 @@
       <div class="col-8">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h1>create a publication</h1>
+            <h3>create a publication</h3>
           </div>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <div *ngFor="let item of listSocials">
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="{{item?.labelNetwork}}-tab" data-toggle="tab" href="#{{item?.labelNetwork}}"
                   role="tab" aria-controls="{{item?.labelNetwork}}" (click)="selectedItem = item?.labelNetwork ">
-                  <h3>{{item?.labelNetwork}}</h3>
+                  <h4>{{item?.labelNetwork}}</h4>
                 </a>
               </li>
             </div>
@@ -55,31 +56,30 @@
                 <!-- <label for="page">Choose a page:</label> -->
                 <div>
                   <div class="row" style="padding: 0.5em;">
-                  <div class="col">
-                    <select class="btn btn-primary col" #itemPage [(ngModel)]="pageId" name="page" id="page"
-                    style="font-size: medium;">
+                    <div class="col">
+                      <select class="btn btn-primary col" #itemPage [(ngModel)]="pageId" name="page" id="page">
 
-                      <option [ngValue]="none">Choose your page</option>
-                      <option [ngValue]="item?.id" *ngFor="let item of listPages">{{item?.name}}
-                      </option>
-                    </select>
+                        <option [ngValue]="none">Choose your page</option>
+                        <option [ngValue]="item?.id" *ngFor="let item of listPages">{{item?.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <label class="form-check-label" for="schedulePost">Choose the date to schedule a post</label>
+                    </div>
+                    <div class="col">
+
+                      <input type="datetime-local" [(ngModel)]="schedulePost" name="schedulePost" id="schedulePost">
+                    </div>
                   </div>
-                  <div class="col">
-                    <label class="form-check-label" for="schedulePost">Choose the date to schedule a post</label>
-                  </div>
-                <div class="col">
-                  
-                  <input type="datetime-local" [(ngModel)]="schedulePost" name="schedulePost" id="schedulePost" >
-                  </div>
-                </div>
                   <div class="row" style="padding: 0.5em;">
-                    <textarea class="form-control" rows="5" id="post" placeholder="Write something here !"
-                      style="font-size: large;" #textValue [(ngModel)]="textPost"></textarea>
-                  
-                </div>
-                <div class="row" style="padding: 0.5em;">
-                  <button class="btn btn-primary btn-lg btn-block" (click)="publishFB()">Publish</button>
-                </div>
+                    <textarea class="form-control" rows="5" id="postFB" placeholder="Write something here !"
+                      aria-valuetext="{{postFB}}" #textValue [(ngModel)]="postFB"></textarea>
+
+                  </div>
+                  <div class="row" style="padding: 0.5em;">
+                    <button class="btn btn-primary btn-lg btn-block" (click)="publishFB()">Publish</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,8 +87,8 @@
               aria-labelledby="LinkedIn-tab">
               <div class="panel-body">
                 <div class="form-group">
-                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !"
-                    style="font-size: large;" #textValue [(ngModel)]="textPost"></textarea>
+                  <textarea class="form-control" rows="5" id="postLink" placeholder="Write something here !" #textValue
+                    [(ngModel)]="postLink"></textarea>
                 </div>
                 <button class="btn btn-primary btn-lg btn-block" (click)="publish()">Publish</button>
               </div>
@@ -98,7 +98,7 @@
               <div class="panel-body">
                 <div class="form-group">
                   <textarea class="form-control" rows="5" id="post" placeholder="Write something here !"
-                    style="font-size: large;" #textValue [(ngModel)]="textPost"></textarea>
+                    aria-valuetext="{{textPost}}" #textValue [(ngModel)]="textPost"></textarea>
                 </div>
                 <button class="btn btn-primary btn-lg btn-block" (click)="publish()">Publish</button>
               </div>
@@ -107,8 +107,8 @@
               role="tabpanel" aria-labelledby="Instagram-tab">
               <div class="panel-body">
                 <div class="form-group">
-                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !"
-                    style="font-size: large;" #textValue [(ngModel)]="textPost"></textarea>
+                  <textarea class="form-control" rows="5" id="post" placeholder="Write something here !" #textValue
+                    [(ngModel)]="textPost"></textarea>
                 </div>
                 <button class="btn btn-primary btn-lg btn-block" (click)="publish()">Publish</button>
               </div>

@@ -33,36 +33,40 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(async (res: any) => {
       console.log("login result \n", res);
       this.user = res;
-      
+
       if (typeof (Storage) !== 'undefined') {
         localStorage.setItem("user", JSON.stringify(this.user));
 
-        this.snService.getSnByID(this.user.id).subscribe( 
-          async (res :any) => {
+        this.snService.getSnByID(this.user.id).subscribe(
+          async (res: any) => {
             console.log("Social networks's user resulat", res);
-            
+
             res["hydra:member"].forEach(element => {
               switch (element.labelNetwork) {
                 case "Facebook":
                   localStorage.setItem("loginFB", JSON.stringify(element));
+                  break;
                 case "LinkedIn":
                   localStorage.setItem("loginIN", JSON.stringify(element));
+                  break;
                 case "Instagram":
                   localStorage.setItem("loginINS", JSON.stringify(element));
+                  break;
                 case "Pinterest":
                   localStorage.setItem("loginPIN", JSON.stringify(element));
+                  break;
                 default:
                   break;
               }
             });
           },
-          (err : any) => {
+          (err: any) => {
             console.error();
           }
-          
+
         );
-        
-        this.router.navigate(['/social-networks']);
+
+        this.router.navigate(['/home/social-networks']);
       }
 
     },

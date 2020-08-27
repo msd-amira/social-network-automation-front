@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { SocialNetworkChoiceComponent } from './social-network-choice/social-network-choice.component';
+import { FeedsComponent } from './feeds/feeds.component';
+import { PublishPostComponent } from './publish-post/publish-post.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -19,8 +21,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { FacebookModule } from 'ngx-facebook';
-import { FeedsComponent } from './feeds/feeds.component';
-import { PublishPostComponent } from './publish-post/publish-post.component';
 
 @NgModule({
   declarations: [

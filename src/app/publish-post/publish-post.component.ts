@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocialNetworkService } from '../services/social-network.service';
 import { FacebookManagerService } from '../services/facebook-manager.service';
 import Swal from 'sweetalert2';
+import { UserService } from '../services/user.service';
+import { analytics } from 'firebase';
 
 @Component({
   selector: 'app-publish-post',
@@ -10,15 +12,17 @@ import Swal from 'sweetalert2';
 })
 export class PublishPostComponent implements OnInit {
   user: any;
-  loginFB : any;
-  itemPage : any;
+  loginFB: any;
+  itemPage: any;
   listSocials: any[];
   listPages: any[];
   selectedItem: string;
-  pageId : string;
-  textPost : string;
-  schedulePost : any;
-  constructor(private snService: SocialNetworkService, private fbService: FacebookManagerService) { }
+  pageId: string;
+  textPost: string;
+  schedulePost: any;
+  loginIN: any;
+
+  constructor(private userService: UserService, private snService: SocialNetworkService, private fbService: FacebookManagerService, ) { }
 
   async ngOnInit(): Promise<any> {
     this.listSocials = []
@@ -31,7 +35,7 @@ export class PublishPostComponent implements OnInit {
         console.log("List social network's user \n", this.listSocials);
         this.listSocials.forEach(element => {
           console.log("element");
-    
+
           switch (element.labelNetwork) {
             case 'Facebook':
               {
@@ -45,7 +49,11 @@ export class PublishPostComponent implements OnInit {
                 );
                 break;
               }
-    
+            case 'LinkedIn':
+              {
+                this.loginIN = JSON.parse(localStorage.getItem("loginIN")).
+                break;
+              }
             default:
               break;
           }
@@ -57,25 +65,29 @@ export class PublishPostComponent implements OnInit {
 
   }
 
-  publishFB(){
-    
+  logout() {
+    this.userService.logoutUser();
+  }
+
+  publishFB() {
+
     console.log(this.pageId);
-    
-    if ((this.pageId == "none" ) || ! this.pageId ) {
+
+    if ((this.pageId == "none") || !this.pageId) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'You must choose a page!',
       })
-    } else if (! this.textPost){
+    } else if (!this.textPost) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'You must write something !',
       })
-    } 
+    }
     else {
-      let page : any ;
+      let page: any;
       this.listPages.forEach(element => {
         if (element.id == this.pageId) {
           page = element;
@@ -83,37 +95,39 @@ export class PublishPostComponent implements OnInit {
       });
 
       if (this.schedulePost) {
-        console.log("schedulePost date\n",this.schedulePost);
-        this.fbService.schedulePostPageFB(page,this.textPost,this.schedulePost).subscribe(
-          async (res : any) => {
+        console.log("schedulePost date\n", this.schedulePost);
+        this.fbService.schedulePostPageFB(page, this.textPost, this.schedulePost).subscribe(
+          async (res: any) => {
             console.log(res);
             await Swal.fire({
               icon: 'success',
               title: 'Success...',
-              text: 'Your post is scheduled at ' + this.schedulePost +' !',
+              text: 'Your post is scheduled at ' + this.schedulePost + ' !',
             })
             await this.ngOnInit();
           }
         )
       }
-      else{
-      
-      this.fbService.publishPostPageFB(page,this.textPost).subscribe(
-        async (res : any) =>{
-          console.log(res);
-          await Swal.fire({
-            icon: 'success',
-            title: 'Success...',
-            text: 'Your post is published successfully !',
-          })
-          await this.ngOnInit();
-        }
-      );
+      else {
+
+        this.fbService.publishPostPageFB(page, this.textPost).subscribe(
+          async (res: any) => {
+            console.log(res);
+            await Swal.fire({
+              icon: 'success',
+              title: 'Success...',
+              text: 'Your post is published successfully !',
+            })
+            await this.ngOnInit();
+          }
+        );
       }
     }
-    
+
   }
 
-  publish(){}
+  publishLink() {
+    
+   }
 
 }
