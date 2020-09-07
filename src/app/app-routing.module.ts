@@ -7,6 +7,8 @@ import { SocialNetworkChoiceComponent } from './social-network-choice/social-net
 import {AuthGuard} from './auth.guard';
 import { FeedsComponent } from './feeds/feeds.component';
 import { PublishPostComponent } from './publish-post/publish-post.component';
+import { EditPostsComponent } from './edit-posts/edit-posts.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,16 @@ const routes: Routes = [
         path : 'feed',
         canActivate : [AuthGuard],
         component : FeedsComponent
+      },
+      {
+        path : 'editPosts',
+        canActivate : [AuthGuard],
+        component : EditPostsComponent
+      },
+      {
+        path : 'admin',
+        canActivate : [AuthGuard],
+        component : AdminComponent
       },
     ]
   },

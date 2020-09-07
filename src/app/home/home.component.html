@@ -25,7 +25,7 @@
 
     <div class="profile">
       <img src="assets/images/facebook.png" alt="" class="img-fluid rounded-circle">
-      <h1 class="text-light"><a href="index.html">Alex Smith</a></h1>
+      <h1 class="text-light"><a href="index.html">{{user.firstname}} {{user.lastname}}</a></h1>
       <div class="social-links mt-3 text-center">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -40,11 +40,13 @@
         <li><a routerLink="home"><i class="bx bx-home"></i> <span>Home</span></a></li>
         <li><a routerLink="publish" routerLinkActive="router-link-active"><i class="bx bx-user"></i> <span>Publish
               posts</span></a></li>
-        <li><a routerLink="feed" routerLinkActive="router-link-active"><i class="bx bx-file-blank"></i>
+        <li><a href="/home/feed"><i class="bx bx-file-blank"></i>
             <span>Feed</span></a></li>
-        <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
+        <li><a routerLink="editPosts" routerLinkActive="router-link-active"><i class="bx bx-book-content"></i> Edit Post</a></li>
         <li><a routerLink="social-networks" routerLinkActive="router-link-active"><i class="bx bx-server"></i>
             Services</a></li>
+            <li *ngIf="role == 'ROLE_SUPER_ADMIN'"><a routerLink="admin" routerLinkActive="router-link-active"><i class="bx bx-server"></i>
+                Settings</a></li>
         <li><a href="#contact"><i class="bx bx-envelope"></i> Contact</a></li>
 
       </ul>

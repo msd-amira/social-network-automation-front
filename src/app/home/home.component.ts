@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { RoleLanguageService } from '../services/role-language.service';
 
 @Component({
   selector: 'app-home',
@@ -7,24 +8,21 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  user: any;
+  role: any;
 
-  constructor(private apiService: UserService) { }
+  constructor(private apiService: RoleLanguageService) { }
 
   ngOnInit(): void {
-    // this.apiService.allUsers().subscribe((res:any) =>{
-    //   console.log(res);
-    // },
-    // (error)=>{
-    //   console.log(error);
-    // }
-    // );
+   
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.apiService.getRoleById(this.user.role.substr(11)).subscribe(
+      res => {
+        this.role = res['label'];
+        console.log(this.role);
+        
+      }
+    )
   }
 
-  allUsers(){
-    
-    // this.apiService.allUsers().subscribe((res:any) =>{
-    //   console.log(res['hydra:member']);
-    // }
-    // );
-  }
 }

@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { SocialNetworkChoiceComponent } from './social-network-choice/social-network-choice.component';
 import { FeedsComponent } from './feeds/feeds.component';
 import { PublishPostComponent } from './publish-post/publish-post.component';
+import { EditPostsComponent } from './edit-posts/edit-posts.component';
+import { AdminComponent } from './admin/admin.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -21,6 +23,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { FacebookModule } from 'ngx-facebook';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ModalModule } from "ngx-bootstrap/modal";
 
 @NgModule({
   declarations: [
@@ -30,14 +34,18 @@ import { FacebookModule } from 'ngx-facebook';
     HomeComponent,
     SocialNetworkChoiceComponent,
     FeedsComponent,
-    PublishPostComponent
+    PublishPostComponent,
+    EditPostsComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     NgbPaginationModule,
+    NgxPaginationModule,
     FormsModule,
+    ModalModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),

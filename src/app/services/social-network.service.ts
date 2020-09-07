@@ -14,8 +14,6 @@ export class SocialNetworkService {
     
    }
 
-
-
   getAllSN(){
     return this.http.get('https://localhost:8000/api/social_networks');
   }
@@ -24,26 +22,14 @@ export class SocialNetworkService {
     return this.http.get('https://localhost:8000/api/user_has_sns/'+id);
   }
 
-  // ******************* Facebook Services ******************
-
-
-  // loginwithFacebook(){
-  //   return new Promise<any>((resolve, reject) => {
-  //     let provider = new firebase.auth.FacebookAuthProvider();
-  //     //provider.addScope('user_birthday');
-      
-  //     //provider.addScope();
-  //     this.afAuth
-  //     .signInWithPopup(provider)
-  //     .then(res => {
-  //     resolve(res);
-  //     console.log(res)
-  //     })
-  //     })
-  // }
-
-
   addUserHasSN(body){
     return this.http.post('https://localhost:8000/api/user_has_sns',body);
+  }
+
+  addAppDev(id : any, key : any, label : any){ 
+    return this.http.get("https://127.0.0.1:8000/appDev/addSetting/" + id+"/"+key+"/"+label);
+  }
+  getAppByLabel(label : any){ 
+    return this.http.get("https://127.0.0.1:8000/appDev/getSetting/" +label);
   }
 }

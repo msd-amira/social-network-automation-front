@@ -17,11 +17,11 @@ export class RoleLanguageService {
   }
 
   getLanguageByLabel(label : any){
-    return this.http.get('https://127.0.0.1:8000/api/languages',label);
+    return this.http.get('https://127.0.0.1:8000/api/languages'+label);
   }
 
   getRoleById(id : any){
-    return this.http.get('https://127.0.0.1:8000/api/roles/',id);
+    return this.http.get('https://127.0.0.1:8000/api/roles/'+id);
   }
 
   getRoleByLabel(label : any){

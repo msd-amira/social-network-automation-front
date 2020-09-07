@@ -74,7 +74,7 @@
                   </div>
                   <div class="row" style="padding: 0.5em;">
                     <textarea class="form-control" rows="5" id="postFB" placeholder="Write something here !"
-                      aria-valuetext="{{postFB}}" #textValue [(ngModel)]="postFB"></textarea>
+                      aria-valuetext="{{textPost}}" #textValue [(ngModel)]="textPost"></textarea>
 
                   </div>
                   <div class="row" style="padding: 0.5em;">
@@ -86,11 +86,31 @@
             <div class="tab-pane fade in active show" *ngIf="selectedItem === 'LinkedIn'" id="LinkedIn" role="tabpanel"
               aria-labelledby="LinkedIn-tab">
               <div class="panel-body">
-                <div class="form-group">
+                <div>
+                  <div class="row" style="padding: 0.5em;">
+                    <div class="col-6">
+                      <input type="text" [(ngModel)]="subjectPost" id= "subject" placeholder="Subject post" >
+                    </div>
+                    <div class="col-3">
+                      <label class="form-check-label" for="schedulePost">Select your privacy</label>
+                    </div>
+                    <div class="col-3">
+                      <select class="btn btn-primary col" #is_public name="visibilitySelect" id="visibilitySelect" >
+                        <option value="CONNECTIONS" >CONNECTIONS</option>
+                        <option value="PUBLIC" >PUBLIC</option>
+                      </select>
+                    </div>
+                    
+                    
+                  </div>
+                <div class="row" style="padding: 0.5em;">
                   <textarea class="form-control" rows="5" id="postLink" placeholder="Write something here !" #textValue
-                    [(ngModel)]="postLink"></textarea>
+                    [(ngModel)]="textPost"></textarea>
                 </div>
-                <button class="btn btn-primary btn-lg btn-block" (click)="publish()">Publish</button>
+                <div class="row" style="padding: 0.5em;">
+                <button class="btn btn-primary btn-lg btn-block" (click)="publishLink(is_public.value)">Publish</button>
+              </div>
+                </div>
               </div>
             </div>
             <div class="tab-pane fade in active show" *ngIf="selectedItem === 'Pinterest'" id="Pinterest"

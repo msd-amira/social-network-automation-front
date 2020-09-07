@@ -1,0 +1,73 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+    <div class="container">
+
+        <div class="row justify-content-between align-items-center">
+            <div class="col-3">
+                <h2>Settings Apps Page</h2>
+            </div>
+            <div class="col-7"></div>
+            <div class="col">
+                <button class="btn btn-dark" (click)="logout()">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- End Breadcrumbs -->
+<section class="inner-page">
+    <div class="container">
+        <form class="form-horizontal" (ngSubmit)="addApp(app.value,idApp.value, keySecret.value)" >
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="app" style="font-size: small;">Your APP:</label>
+                <select class="btn btn-primary" #app  name="app" id="app" style="font-size: small;">
+
+                    <option value="">Choose a social network</option>
+                    <option value="{{item?.label}}" *ngFor="let item of listSocial">{{item?.label}}
+                    </option>
+                  </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="idApp" style="font-size: small;">ID APP:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" #idApp id="idApp" placeholder="Enter idApp" style="font-size: small;">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="keySecret" style="font-size: small;">Key secret:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" #keySecret id="keySecret" placeholder="Enter Key secret" style="font-size: small;">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" style="font-size: small;">Submit</button>
+              </div>
+            </div>
+          </form>
+    </div>
+</section>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { InitParams, FacebookService, LoginOptions, LoginResponse } from 'ngx-facebook';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SocialNetworkService } from './social-network.service';
 
 @Injectable({
   providedIn : 'root'
@@ -12,23 +13,27 @@ export class FacebookManagerService {
   private facebookUrlGetTokenBase : string;
   private facebookAppID : string;
   private facebookAppSecret : string;
+  settingsApp: any;
 
-  constructor(private http : HttpClient, private fb : FacebookService, private router : Router) {
+  constructor(private http : HttpClient, private fb : FacebookService, private router : Router, private snService : SocialNetworkService) {
 
     this.facebookUrlAuthorizeBase = "https://graph.facebook.com/oauth/authorize";
     this.facebookUrlGetTokenBase = "https://graph.facebook.com/oauth/access_token";
-    this.facebookAppID = "227386015000000";
-    this.facebookAppSecret = "88284a8a1dc34c19415d16ad71f79a25";
+    this.snService.getAppByLabel("Facebook").subscribe(
+      (res : any) => {
+      console.log(res);
+      this.settingsApp = res
+    this.facebookAppID = res.AppID ;
+    this.facebookAppSecret = res.KeySecret;
+    });
+    // const initParams : InitParams = {
+    //   appId : '227386015000000',
+    //   xfbml : true,
+    //   version : 'v7.0'
+    // };
 
-    const initParams : InitParams = {
-      appId : '227386015000000',
-      xfbml : true,
-      version : 'v7.0'
-    };
-
-    this.fb.init(initParams);
+    // this.fb.init(initParams);
   }
-
   async loginWithFacebook() {
     const options : LoginOptions = {
       //permissions :
@@ -81,7 +86,14 @@ export class FacebookManagerService {
   }
 
   getFeedsPage(page : any){
-    return this.http.get("https://graph.facebook.com/" + page.id + "/feed?fields=permalink_url&access_token=" +  page.access_token);
+    return this.http.get("https://graph.facebook.com/" + page.id + "/feed?fields=permalink_url,message&access_token=" +  page.access_token);
+  }
+
+  getUnpublishFeedsPage(page : any){
+    return this.http.get("https://graph.facebook.com/" + page.id + "/feed?fields=permalink_url,message,is_published=false&access_token=" +  page.access_token);
+  }
+  getNExtFeeds(url : any){
+    return this.http.get(url);
   }
 
   publishPostPageFB(page : any, msg : any){
@@ -109,10 +121,10 @@ export class FacebookManagerService {
   }
 
   updatePostPage(page : any, idPost : any, msg : any){
-    return this.http.post("https://graph.facebook.com/" + page.id + "_"  + idPost + "?message=" + msg + "&access_token=" + page.access_token , msg);
+    return this.http.post("https://graph.facebook.com/" + idPost + "?message=" + msg + "&access_token=" + page.access_token , msg);
   }
 
   deletePostPage(page : any, idPost : any){
-    return this.http.delete("https://graph.facebook.com/" + page.id + "_" + idPost + "&access_token=" + page.access_token);
+    return this.http.delete("https://graph.facebook.com/v8.0/" + idPost + "?access_token=" + page.access_token);
   }
 }

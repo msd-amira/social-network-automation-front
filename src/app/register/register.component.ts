@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   RegisterForm: FormGroup;
   langues : Language [] = new Array() ;
   user : User;
+  url: string | ArrayBuffer;
 
   constructor(private userService: UserService, private roleLanguageService: RoleLanguageService, private router: Router) {
     this.RegisterForm = new FormGroup({
@@ -46,6 +47,20 @@ export class RegisterComponent implements OnInit {
     })
     console.log(this.langues);
   }
+
+  onSelectFile(event) { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+        console.log(this.url);
+        
+      }
+    }
+}
 
   async newUser(userForm : any) : Promise<any>{
     this.user = new User();

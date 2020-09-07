@@ -12,15 +12,8 @@
     crossorigin="anonymous"></script>
 
 <!-- Facebook SDK -->
-<script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=227386015000000&autoLogAppEvents=1"
-    nonce="GXPY5IWa"></script>
-<script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v8.0&appId=227386015000000&autoLogAppEvents=1"
-    nonce="Mz3p4xKz"></script>
-<script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=227386015000000&autoLogAppEvents=1"
-    nonce="iApYb2lM"></script>
+
+
 <!-- ======= Breadcrumbs ======= -->
 <section class="breadcrumbs">
     <div class="container">
@@ -53,7 +46,7 @@
                             <option [ngValue]="item?.id" *ngFor="let item of listPages">{{item?.name}}
                             </option>
                         </select>
-                        <script>
+                        <!-- <script>
                             window.fbAsyncInit = function () {
                                 FB.init({
                                     appId: '227386015000000',
@@ -64,34 +57,33 @@
                             };
                         </script>
                         <script async defer crossorigin="anonymous"
-                            src="https://connect.facebook.net/en_US/sdk.js"></script>
-                        <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-                        <!-- <iframe
-                            src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/{{pageId}}&tabs=timeline&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=227386015000000"
-                            width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-                            allowTransparency="true" allow="encrypted-media"></iframe> -->
-                        <iframe
-                            src="https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/100869335066617/posts/108332090987008/"
-                            style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
-                            allow="encrypted-media"></iframe>
-                        <div class="fb-comments"
-                            data-href="https://www.facebook.com/permalink.php?story_fbid=108332090987008&id=100869335066617"
-                            data-numposts="5" data-width=""></div>
-                        <!-- 
+                            src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+                        <!--<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+<!-- <div *ngFor="let item of listPages">
+                        <div class="fb-page" data-href="item?.link" data-tabs="timeline"
+                            data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
+                            data-hide-cover="false" data-show-facepile="true">{item?.name}
                             
-                          <div 
-                            class="fb-post" 
-                            data-href="https://www.facebook.com/20531316728/posts/10154009990506729/" 
-                            data-width="500">sqcddscds</div> -->
-                    </div>
-                    <!-- <div class="fb-post" data-href="https://www.facebook.com/20531316728/posts/10154009990506729/"
-                        data-show-text="true" data-width="">
-                        <blockquote cite="https://www.facebook.com/20531316728/posts/10154009990506729/"
-                            class="fb-xfbml-parse-ignore">Publiée par <a
-                                href="https://www.facebook.com/facebookapp/">Facebook App</a> sur&nbsp;<a
-                                href="https://www.facebook.com/20531316728/posts/10154009990506729/">Jeudi 27 août
-                                2015</a></blockquote>
+                        </div>
                     </div> -->
+                     <!--    <div class="fb-page" data-href="{{namepage}}" data-tabs="timeline"
+                            data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
+                            data-hide-cover="false" data-show-facepile="true">
+                            
+                        </div> -->
+                     <fb-page [href]="namepage" data-tabs="timeline" data-width="" data-height="" data-small-header="false"
+                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></fb-page>
+                        <!-- <a href="{{link}}"></a>-->
+                        
+                         <!-- <iframe
+                            src="https://www.facebook.com/100869335066617"
+                            style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                            allowTransparency="true" allow="encrypted-media"></iframe>  -->
+
+                        
+
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -35,11 +35,15 @@ export class SocialNetworkChoiceComponent implements OnInit {
       this.snList = await res['hydra:member'];
       let codeOauth = this.activatedRoute.snapshot.queryParamMap.get('code');
       if (codeOauth) {
+        console.log(codeOauth);
+        
         this.addLinkedin(codeOauth, true);
       }
 
       let cancelLogin = this.activatedRoute.snapshot.queryParamMap.get('error');
       if (cancelLogin) {
+        console.log(cancelLogin);
+        
         this.addLinkedin(cancelLogin, false);
       }
       this.userSN = new UserHasSN();
@@ -181,7 +185,7 @@ export class SocialNetworkChoiceComponent implements OnInit {
 
               let token = JSON.parse(localStorage.getItem('user'));
 
-              this.userSN = await this.addUserHAsSn(resUser.id, resToken.access_token, "LinkedIn", "", resUser.profilePicture.displayImage, "/api/social_networks/2", token['@id'])
+              this.userSN = await this.addUserHAsSn(resUser.id, resToken.access_token, "LinkedIn", "", "", "/api/social_networks/2", token['@id'])
 
               this.snService.addUserHasSN(this.userSN).subscribe(
                 async (res: any) => {
